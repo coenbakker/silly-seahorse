@@ -1486,5 +1486,6 @@ defmodule SillySeahorse.Noun do
     "zorse",
     "zuchon"
   }
-  def nouns, do: @nouns
+
+  def nouns(), do: @nouns
 end

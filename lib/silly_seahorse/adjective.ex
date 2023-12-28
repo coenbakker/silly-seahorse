@@ -1039,7 +1039,6 @@ defmodule SillySeahorse.Adjective do
     "windy",
     "winged",
     "winsome",
-    "winter",
     "wiry",
     "wise",
     "wispy",
@@ -1072,5 +1071,6 @@ defmodule SillySeahorse.Adjective do
     "zesty",
     "zigzag"
   }
-  def adjectives, do: @adjectives
+
+  def adjectives(), do: @adjectives
 end
