@@ -1,6 +1,5 @@
 defmodule SillySeahorseTest do
   use ExUnit.Case
-  doctest SillySeahorse
 
   @max_name_length 20
 
@@ -70,7 +69,8 @@ defmodule SillySeahorseTest do
       assert SillySeahorse.generate_random(delimiter: ".")
              |> String.match?(~r/^[a-z]+(\.[a-z]+)*$/)
 
-      assert SillySeahorse.generate_random(delimiter: "") |> String.match?(~r/^[a-z]+[a-z]+$/)
+      assert SillySeahorse.generate_random(delimiter: "")
+             |> String.match?(~r/^[a-z]+[a-z]+$/)
     end
   end
 end
