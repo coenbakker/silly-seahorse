@@ -1,6 +1,9 @@
 # SillySeahorse
 
-Create random usernames like "silly_seahorse" and "anxious_turtle".
+Create random usernames like "silly_seahorse" and "anxious-turtle".
+
+Currently, only supports lower case letters. However, you can choose
+a custom delimiter. By default "_" us used as delimiter.
 
 ## Installation
 
@@ -21,8 +24,8 @@ end
 ```elixir
 generate_random()
 => "silly_seahorse"
-generate_random()
-=> "anxious_turtle"
+generate_random(delimiter: "-")
+=> "anxious-turtle"
 ```
 
 ## License
