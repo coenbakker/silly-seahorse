@@ -57,15 +57,19 @@ defmodule SillySeahorseTest do
   describe "generate_random/1" do
     test "optionally returns usernames longer than 20 characters" do
       assert Enum.any?(1..400, fn _ ->
-        SillySeahorse.generate_random(max_length: 30)
-        |> String.length()
-        |> Kernel.>(20)
-      end)
+               SillySeahorse.generate_random(max_length: 30)
+               |> String.length()
+               |> Kernel.>(20)
+             end)
     end
 
     test "optionally returns usernames with a delimiter other than _" do
-      assert SillySeahorse.generate_random(delimiter: "-") |> String.match?(~r/^[a-z]+(-[a-z]+)*$/)
-      assert SillySeahorse.generate_random(delimiter: ".") |> String.match?(~r/^[a-z]+(\.[a-z]+)*$/)
+      assert SillySeahorse.generate_random(delimiter: "-")
+             |> String.match?(~r/^[a-z]+(-[a-z]+)*$/)
+
+      assert SillySeahorse.generate_random(delimiter: ".")
+             |> String.match?(~r/^[a-z]+(\.[a-z]+)*$/)
+
       assert SillySeahorse.generate_random(delimiter: "") |> String.match?(~r/^[a-z]+[a-z]+$/)
     end
   end

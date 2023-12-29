@@ -1,28 +1,26 @@
 defmodule SillySeahorse do
   @moduledoc """
-    This library will generate random names like "cheery-dog" or "litte-spicy-cat".
-    The names are made up of one or two adjectives and a name of an animal.
+    This library will generate random names like "silly_seahorse" or "anxious-turtle".
+    A generated name is made up of an adjectives and a name of an animal.
 
-    If you need more variation, you can generate names likes "litte-spicy-cat-2047".
+    By default, there is a 50 percent chance that an adverb will be prepended to the
+    name as well. This option can be disabled by passing `allow_adverb: false` to
+    `generate_random/1`.
 
-    It can also create consistent names if you pass in integers
+    Additionally, words are joined by the delimiter `_` and the max length of the
+    generated name is 20 characters. Both of these options can be changed by passing
+    `:delimiter` or `:max_length` to `generate_random/1`.
 
-    Example. This will always return `"interesting-emu"`
+    Note that the smallest value for `:max_length` is 20. If you pass a smaller value,
+    it will be ignored.
 
-        user = %User{id: 341, timestamp: 1530244444}
-        generate_consistent(user.id, user.timestamp)
-        => "interesting-emu"
-        generate_consistent(user.id, user.timestamp)
-        => "interesting-emu"
-
-    Options:
+    **Options**
     :delimiter - The character to use between the words. Default is "_".
     :allow_adverb - If true, it will try to prepend an adjective to the name.
     If it can't because of the max name length, it returns the originally
     generated name. Also, even if there are enough characters left, there is
     a 50 percent chance that an adverb will not be prepended. Default is true.
-    :snake_case - If true, it will convert the name to snake case. Default is true.
-    :max_name_length - The max length of the generated name. Default is 20.
+    :max_length - The max length of the generated name. Default is 20.
   """
   @max_name_length 20
 
@@ -47,16 +45,14 @@ defmodule SillySeahorse do
   def adverb_count(), do: @adverbs |> tuple_size()
 
   @doc """
-    This will create a new unique name on each call.
-    By default, the number of possibilities are:
-    number of adjectives(#{@adjective_count}) multiplied by the number of nouns(#{@noun_count}) = #{@adjective_count * @noun_count}
+    Generates a random username.
 
-    Passing a param will add a number if more possibilities are needed.
+    ## Examples
 
-        generate_random()
-        => "cheery-pond"
-        generate_random(1_000_000)
-        => "spicy-snowflake-5"
+        SillySeahorse.generate_random()
+        => "silly_seahorse"
+        SillySeahorse.generate_random(delimiter: "-")
+        => "anxious-turtle"
 
   """
   @spec generate_random(list | []) :: String.t()
@@ -105,6 +101,7 @@ defmodule SillySeahorse do
 
   defp apply_delimiter(name_as_list, opts) do
     delimiter = Keyword.get(opts, :delimiter, "_")
+
     name_as_list
     |> Enum.join(delimiter)
     |> String.replace(" ", delimiter)
