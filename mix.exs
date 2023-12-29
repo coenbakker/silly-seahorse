@@ -1,5 +1,6 @@
 defmodule SillySeahorse.MixProject do
   use Mix.Project
+
   @github_url "https://github.com/coenbakker/SillySeahorse"
 
   def project do
@@ -8,18 +9,11 @@ defmodule SillySeahorse.MixProject do
       version: "0.1.0",
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
+      description: description(),
+      package: package(),
       deps: deps(),
-      description: ~s|Create random usernames like "silly_seahorse" and "anxious-turtle".|,
-      source_url: @github_url,
-      homepage_url: @github_url,
-      files: ~w(mix.exs lib LICENSE.md README.md CHANGELOG.md),
-      package: [
-        maintainers: ["Coen Bakker"],
-        licenses: ["MIT"],
-        links: %{
-          "GitHub" => @github_url
-        }
-      ]
+      name: "silly_seahorse",
+      source_url: @github_url
     ]
   end
 
@@ -37,10 +31,16 @@ defmodule SillySeahorse.MixProject do
     ]
   end
 
-  def package do
+  defp description do
+    """
+    Create random usernames like "silly_seahorse" and "anxious-turtle".
+    """
+  end
+
+  defp package do
     [
       name: "silly_seahorse",
-      files: ["lib", "priv", "mix.exs", "README*", "readme*", "LICENSE*", "license*"],
+      files: ~w(lib .formatter.exs mix.exs LICENSE.md README.md CHANGELOG.md),
       licenses: ["MIT"],
       links: %{"GitHub" => @github_url}
     ]
