@@ -1,26 +1,18 @@
 defmodule SillySeahorse do
   @moduledoc """
-    This library will generate random names like "silly_seahorse" or "anxious-turtle".
-    A generated name is made up of an adjectives and a name of an animal.
+  This library will generate random names like "silly_seahorse" or "anxious-turtle".
+  A generated name is made up of an adjectives and a name of an animal.
 
-    By default, there is a 50 percent chance that an adverb will be prepended to the
-    name as well. This option can be disabled by passing `allow_adverb: false` to
-    `generate_random/1`.
+  By default, there is a 50 percent chance that an adverb will be prepended to the
+  name as well. This option can be disabled by passing `allow_adverb: false` to
+  `generate_random/1`.
 
-    Additionally, words are joined by the delimiter `_` and the max length of the
-    generated name is 20 characters. Both of these options can be changed by passing
-    `:delimiter` or `:max_length` to `generate_random/1`.
+  Additionally, words are joined by the delimiter `_` and the max length of the
+  generated name is 20 characters. Both of these options can be changed by passing
+  `:delimiter` or `:max_length` to `generate_random/1`.
 
-    Note that the smallest value for `:max_length` is 20. If you pass a smaller value,
-    it will be ignored.
-
-    **Options**
-    :delimiter - The character to use between the words. Default is "_".
-    :allow_adverb - If true, it will try to prepend an adjective to the name.
-    If it can't because of the max name length, it returns the originally
-    generated name. Also, even if there are enough characters left, there is
-    a 50 percent chance that an adverb will not be prepended. Default is true.
-    :max_length - The max length of the generated name. Default is 20.
+  Note that the smallest value for `:max_length` is 20. If you pass a smaller value,
+  it will be ignored.
   """
   @max_name_length 20
 
@@ -45,14 +37,32 @@ defmodule SillySeahorse do
   def adverb_count(), do: @adverbs |> tuple_size()
 
   @doc """
-    Generates a random username.
+  Generates a random username.
 
-    ## Examples
+  ## Examples
 
-        SillySeahorse.generate_random()
-        => "silly_seahorse"
-        SillySeahorse.generate_random(delimiter: "-")
-        => "anxious-turtle"
+      SillySeahorse.generate_random()
+      => "silly_seahorse"
+
+  ## Options
+
+    * :delimiter - The character to use between the words. Default is "_".
+    * :allow_adverb - If true, it will try to prepend an adjective to the name.
+      If it can't because of the max name length, it returns the originally
+      generated name. Also, even if there are enough characters left, there is
+      a 50 percent chance that an adverb will not be prepended. Default is true.
+    * :max_length - The max length of the generated name. Default is 20.
+
+  ### Examples
+
+      SillySeahorse.generate_random(delimiter: "-")
+      => "very-anxious-turtle"
+
+      SillySeahorse.generate_random(allow_adverb: false)
+      => "anxious-turtle"
+      
+      SillySeahorse.generate_random(max_length: 30)
+      => "extremely_worried_hippopotamus"
 
   """
   @spec generate_random(list | []) :: String.t()
