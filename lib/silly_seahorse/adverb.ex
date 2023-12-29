@@ -26,7 +26,6 @@ defmodule SillySeahorse.Adverb do
     "reasonably",
     "relatively",
     "slightly",
-    "so",
     "somewhat",
     "sort of",
     "super",

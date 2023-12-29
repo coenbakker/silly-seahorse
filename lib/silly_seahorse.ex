@@ -66,48 +66,48 @@ defmodule SillySeahorse do
   def generate_random(opts) do
     adj = elem(@adjectives, :rand.uniform(@adjective_count) - 1)
     noun = elem(@nouns, :rand.uniform(@noun_count) - 1)
-    delimiter = Keyword.get(opts, :delimiter, "_")
-    name = adj <> delimiter <> noun
+    name_as_list = [adj, noun]
 
-    name
+    name_as_list
     |> maybe_prepend_adverb(opts)
-    |> maybe_snake_case(opts)
+    |> apply_delimiter(opts)
   end
 
-  defp maybe_prepend_adverb(name, opts) do
-    coin_flip = Enum.random([true, false])
+  defp string_length_of(list) do
+    list
+    |> Enum.join()
+    |> String.length()
+  end
+
+  defp maybe_prepend_adverb(name_as_list, opts) do
     allow_adverb = Keyword.get(opts, :allow_adverb, true)
+    max_name_length = Keyword.get(opts, :max_length, @max_name_length) |> max(@max_name_length)
 
-    if coin_flip && allow_adverb do
-      max_name_length = Keyword.get(opts, :max_name_length, @max_name_length)
-      n_char_remaining = max_name_length - String.length(name)
+    if allow_adverb && Enum.random([true, false]) do
+      n_char_remaining = max_name_length - string_length_of(name_as_list) - 1
 
-      list =
+      adverbs =
         @adverbs
         |> Tuple.to_list()
         |> Enum.filter(&(String.length(&1) <= n_char_remaining - 1))
 
-      case list do
+      case adverbs do
         [] ->
-          name
+          name_as_list
 
         _ ->
-          delimiter = Keyword.get(opts, :delimiter, "_")
-          Enum.random(list) <> delimiter <> name
+          [Enum.random(adverbs) | name_as_list]
       end
     else
-      name
+      name_as_list
     end
   end
 
-  defp maybe_snake_case(name, opts) do
-    if Keyword.get(opts, :snake_case, true) do
-      name
-      |> String.downcase()
-      |> String.replace("-", "_")
-      |> String.replace(" ", "_")
-    else
-      name
-    end
+  defp apply_delimiter(name_as_list, opts) do
+    delimiter = Keyword.get(opts, :delimiter, "_")
+    name_as_list
+    |> Enum.join(delimiter)
+    |> String.replace(" ", delimiter)
+    |> String.replace("-", delimiter)
   end
 end
