@@ -5,3 +5,8 @@
 # v 0.1.1
 
 * Minor improvements to docs
+
+# v 0.1.2
+
+* Enforcing that the delimiter length is always equal to one grapheme
+* Improvements to docs
