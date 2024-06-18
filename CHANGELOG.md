@@ -10,3 +10,7 @@
 
 * Enforcing that the delimiter length is always equal to one grapheme
 * Improvements to docs
+
+# v 0.1.3
+
+* Fix broken GitHub link

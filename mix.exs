@@ -1,12 +1,12 @@
 defmodule SillySeahorse.MixProject do
   use Mix.Project
 
-  @github_url "https://github.com/coenbakker/SillySeahorse"
+  @github_url "https://github.com/coenbakker/silly-seahorse"
 
   def project do
     [
       app: :silly_seahorse,
-      version: "0.1.2",
+      version: "0.1.3",
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
       description: description(),
