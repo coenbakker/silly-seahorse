@@ -62,15 +62,23 @@ defmodule SillySeahorseTest do
              end)
     end
 
-    test "optionally returns usernames with a delimiter other than _" do
+    test "optionally returns usernames with a delimiter other than the default" do
       assert SillySeahorse.generate_random(delimiter: "-")
              |> String.match?(~r/^[a-z]+(-[a-z]+)*$/)
 
       assert SillySeahorse.generate_random(delimiter: ".")
              |> String.match?(~r/^[a-z]+(\.[a-z]+)*$/)
 
+      assert SillySeahorse.generate_random(delimiter: "x")
+             |> String.match?(~r/^[a-z]+(x[a-z]+)*$/)
+    end
+
+    test "falls back to default delimiter when user passes option value other than a one grapheme string" do
       assert SillySeahorse.generate_random(delimiter: "")
-             |> String.match?(~r/^[a-z]+[a-z]+$/)
+             |> String.match?(~r/^[a-z]+(_[a-z]+)*$/)
+
+      assert SillySeahorse.generate_random(delimiter: "abc")
+             |> String.match?(~r/^[a-z]+(_[a-z]+)*$/)
     end
   end
 end

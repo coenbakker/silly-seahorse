@@ -6,14 +6,18 @@ defmodule SillySeahorse.MixProject do
   def project do
     [
       app: :silly_seahorse,
-      version: "0.1.1",
+      version: "0.1.2",
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
       description: description(),
       package: package(),
       deps: deps(),
       name: "silly_seahorse",
-      source_url: @github_url
+      source_url: @github_url,
+      dialyzer: [
+        plt_add_deps: :apps_direct,
+        plt_add_apps: [:mix]
+      ]
     ]
   end
 
@@ -27,7 +31,8 @@ defmodule SillySeahorse.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, "~> 0.19", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.19", only: :dev, runtime: false},
+      {:dialyxir, "~> 1.0", only: [:dev], runtime: false}
     ]
   end
 
