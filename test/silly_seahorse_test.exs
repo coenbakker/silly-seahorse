@@ -46,9 +46,9 @@ defmodule SillySeahorseTest do
       end
     end
 
-    test "returns snake case" do
+    test "returns kebab-case" do
       for _ <- 1..400 do
-        assert String.match?(SillySeahorse.generate_random(), ~r/^[a-z]+(_[a-z]+)*$/)
+        assert String.match?(SillySeahorse.generate_random(), ~r/^[a-z]+(-[a-z]+)*$/)
       end
     end
   end
@@ -75,10 +75,10 @@ defmodule SillySeahorseTest do
 
     test "falls back to default delimiter when user passes option value other than a one grapheme string" do
       assert SillySeahorse.generate_random(delimiter: "")
-             |> String.match?(~r/^[a-z]+(_[a-z]+)*$/)
+             |> String.match?(~r/^[a-z]+(-[a-z]+)*$/)
 
       assert SillySeahorse.generate_random(delimiter: "abc")
-             |> String.match?(~r/^[a-z]+(_[a-z]+)*$/)
+             |> String.match?(~r/^[a-z]+(-[a-z]+)*$/)
     end
   end
 end

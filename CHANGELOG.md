@@ -19,3 +19,7 @@
 
 * Improved documentation
 * Default delimiter changed from `_` to `-`
+
+# v 0.1.5
+
+* Fix tests
