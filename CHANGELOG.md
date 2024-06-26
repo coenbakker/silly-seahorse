@@ -14,3 +14,8 @@
 # v 0.1.3
 
 * Fix broken GitHub link
+
+# v 0.1.4
+
+* Improved documentation
+* Default delimiter changed from `_` to `-`

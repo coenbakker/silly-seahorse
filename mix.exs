@@ -6,7 +6,7 @@ defmodule SillySeahorse.MixProject do
   def project do
     [
       app: :silly_seahorse,
-      version: "0.1.3",
+      version: "0.1.4",
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
       description: description(),
