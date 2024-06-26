@@ -2,9 +2,6 @@
 
 Create random usernames like "silly_seahorse" and "anxious-turtle".
 
-Currently, only supports lower case letters. However, you can choose
-a custom delimiter. By default "_" us used as delimiter.
-
 ## Installation
 
 Add `silly_seahorse` to your list of dependencies in `mix.exs`:
@@ -23,9 +20,11 @@ end
 
 ```elixir
 generate_random()
-=> "silly_seahorse"
-generate_random(delimiter: "-")
-=> "anxious-turtle"
+=> "silly-seahorse"
+generate_random(delimiter: "_")
+=> "very_anxious_turtle"
+generate_random(allow_adverb: false)
+=> "happy-hippopotamus"
 ```
 
 ## License
